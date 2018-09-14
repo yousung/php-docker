@@ -1,0 +1,6 @@
+/data
+/php/ssh
+.vscode
+.idea
+/php/config/.ssh/
+/.env

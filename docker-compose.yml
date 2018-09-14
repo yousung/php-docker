@@ -1,0 +1,81 @@
+version : '2'
+services:
+# MYSQL
+  mysql:
+    build: ./mysql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - TZ=Asia/Seoul
+    volumes:
+        - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+        - ./data:/var/lib/mysql
+    networks:
+      - appent        
+
+# NGINX
+  nginx:
+      build:
+        context: ./nginx
+      volumes:
+        - ../:/var/www
+        - ./nginx/sites:/etc/nginx/sites-available
+      ports:
+        - "80:80"
+        - "443:443"
+      networks:
+      - appent
+
+#PHPMYADMIN
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:4.7
+    restart: always
+    depends_on:
+      - mysql
+    ports:
+      - "8000:80"
+    environment:
+      - "PMA_HOST=mysql"
+      - "PMA_USER=root"
+      - "PMA_PASSWORD=root"
+    networks:
+      - appent
+
+# REDIS
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - "6379:6379"
+    networks:
+      - appent
+
+# MEMCACHED
+  memcached:
+    image: memcached
+    restart: always
+    ports:
+      - "11211:11211"
+    networks:
+      - appent
+
+# PHP-FPM
+  php:
+    build:
+      context: ./php
+      args:
+        - ID_RSA=${ID_RSA}
+        - ID_RSA_PUB=${ID_RSA_PUB}
+        - CONFIG=${CONFIG}
+    restart: always
+    working_dir: /var/www
+    volumes:
+        - "../:/var/www"
+    networks:
+      - appent
+
+networks:
+    appent:
+      driver: "bridge"
