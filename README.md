@@ -12,6 +12,7 @@
 ```
 $ git clone https://github.com/yousung/docker-laravel
 $ cd docker-laravel
+$ cp .env.example .env
 $ docker-compose up -d // or docker-compose php redis
 
 // option
