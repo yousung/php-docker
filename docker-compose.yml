@@ -68,7 +68,6 @@ services:
       args:
         - ID_RSA=${ID_RSA}
         - ID_RSA_PUB=${ID_RSA_PUB}
-        - CONFIG=${CONFIG}
     restart: always
     working_dir: /var/www
     volumes:

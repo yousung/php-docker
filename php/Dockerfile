@@ -60,11 +60,9 @@ RUN ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N ""
 # SSH 설정
 ARG ID_RSA=config/id_rsa
 ARG ID_RSA_PUB=config/id_rsa.pub
-ARG CONFIG=config/config
 
 COPY ${ID_RSA} /root/key
 COPY ${ID_RSA_PUB} /root/key.pub
-COPY ${CONFIG} /root/.ssh/config
 
 RUN cat /root/key > /root/.ssh/id_rsa && rm -rf /root/key \
     && cat /root/key.pub > /root/.ssh/id_rsa.pub && rm -rf /root/key.pub
