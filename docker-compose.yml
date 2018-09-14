@@ -72,6 +72,7 @@ services:
     working_dir: /var/www
     volumes:
         - "../:/var/www"
+#        - "./php/config/.ssh/config:/root/.ssh/config"
     networks:
       - appent
 
