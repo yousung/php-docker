@@ -37,7 +37,7 @@ mysql DB laravel pw : secret
 ### History
 ```
 2018.09.13 : laravel 5.7 필수사양으로 PHP image 변경
-2018.09.14 : PHP>config php bash 시 홈디렉토리 항목들 link
+2018.09.14 : PHP>config php bash 시 홈디렉토리 항목들 link / .env 환경설정 추가
 ```
 
 라이센스 : MIT
